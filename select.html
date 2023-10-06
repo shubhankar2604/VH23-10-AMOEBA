@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<h2> Welcome to the Scholarship Portal </h2>
+		<h5>Select the standard year</h5>
+		<select id="basic" class="selectpicker show-tick form-control">		  
+		  <option class="get-class" >First Year</option>
+		  <option class="get-class" >Second Year</option>
+          <option class="get-class" >Third Year</option>
+		  <option class="get-class" >Fourth Year</option>
+          
+        </select>
+		<select class="form-control" id="sEligibleBranchAdd" multiple="multiple">
+			<optgroup data-subtext="V" class="closed" label="SUBJETS:">
+				<option value="4_1">IT</option>
+				<option value="4_2">COMPS</option>
+				<option value="4_3">MECH</option>
+				<option value="4_4">EXTC</option>
+				<option value="4_5">INSTRU</option>
+				<option value="4_6">ELEC</option>
+				<option value="4_7">CSE</option>
+				<option value="4_8">AI&DS</option>
+				<option value="4_9">DE</option>
+				<option value="4_10">PROD</option>
+				</optgroup></select>
+		<script>
+			window.onload = function () {
+				$('#sEligibleBranchAdd').selectpicker();
+				$('.selectpicker').selectpicker({
+				  style: 'btn-info'
+				});
+				$(function (){
+					$(document).on("mouseup", ".text-muted", function (){
+						var el = this.parentElement.parentElement;
+						var classList = el.classList;
+						for(var i = 0;i < classList.length;i++) {
+							if(classList[i].indexOf("optgroup-") != -1) {
+								var className = classList[i];
+								break;
+							}
+						}
+						var els = el.parentElement.getElementsByClassName(className);
+						Array.prototype.map.call(els, function (el) {el.style.display = el.style.display === "none" ? "" : "none";});
+						el.style.display = el.style.display === "none" ? "" : "none";
+					});
+					// initially close all optgroups that have the class "closed"
+					var flag = 1;
+					$(document).on("shown.bs.select", function (){
+						if(flag) {
+							Array.prototype.map.call(document.getElementsByClassName("dropdown-header closed"), function (el) {
+							var classList = el.classList;
+							for(var i = 0;i < classList.length;i++) {
+								if(classList[i].indexOf("optgroup-") != -1) {
+									var className = classList[i];
+									break;
+								}
+							}
+							var els = el.parentElement.getElementsByClassName(className);
+							Array.prototype.map.call(els, function (el) {el.style.display = el.style.display === "none" ? "" : "none";});
+							el.style.display = el.style.display === "none" ? "" : "none";
+							});
+							Array.prototype.map.call(document.getElementsByClassName("text-muted"),function (el) {el.innerHTML = "<i style='font-size:20px;' class='fa'>&#xf0dd;</i>";});
+						}
+						flag = 0;
+					});
+					$(document).on("click", ".dropdown-header", function () {
+						var val = $('.selectpicker').val();
+						var classList = this.classList;
+						for(var i = 0;i < classList.length;i++) {
+							if(classList[i].indexOf("optgroup-") != -1) {
+								var className = classList[i];
+								break;
+							}
+						}
+					})
+				});
+			}
+		</script>
+	</body>
+</html>
