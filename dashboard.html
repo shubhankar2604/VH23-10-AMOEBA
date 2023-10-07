@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dashboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/bootstrap/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/bootstrap-select/dist/css/bootstrap-select.min.css"> -->
+    <!-- Font CSS-->
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="css/fontastic.css">
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+  </head>
+  <body>
+    <div id="loader"></div>
+    <div class="page" id="hidden-element">
+      <!-- Main Navbar-->
+      <header class="header">
+        <nav class="navbar">
+          <!-- Search Box-->
+          <div class="search-box">
+            <button class="dismiss"><i class="icon-close"></i></button>
+            <form id="searchForm" action="#" role="search">
+              <input type="search" placeholder="What are you looking for?" class="form-control">
+            </form>
+          </div>
+          <div class="container-fluid">
+            <div class="navbar-holder d-flex align-items-center justify-content-between">
+              <!-- Navbar Header-->
+              <div class="navbar-header">
+                <!-- Navbar Brand --><a href="index.html" class="navbar-brand">
+                  <div class="brand-text brand-big"><strong>Scholarship Portal</strong></div>
+                  <div class="brand-text brand-small"><strong>SP</strong></div></a>
+                <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
+              </div>
+              <!-- Navbar Menu -->
+              <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                <!-- Search-->
+                <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li>
+                <!-- Notifications-->
+                <!-- Messages-->
+                <!-- Logout-->
+                <li class="nav-item"><a class="nav-link logout" href="http://localhost:63342/Scholarship-portal-master/index.html" onclick="logout()">Logout<i class="fa fa-sign-out"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div class="page-content d-flex align-items-stretch">
+        <!-- Side Navbar -->
+        <nav class="side-navbar">
+          <!-- Sidebar Header-->
+          <div class="sidebar-header d-flex align-items-center">
+            <div class="avatar"><img src="img/user.png" alt="..." class="img-fluid rounded-circle"></div>
+            <div class="title">
+              <h5 class="h5" id="suserName"></h1>
+              <strong id="sMIS"></strong>
+            </div>
+          </div>
+          <!-- Sidebar Navidation Menus-->
+          <ul class="list-unstyled">
+                    <li><a href="http://localhost:63342/Scholarship-portal-master/dashboard.html" id="defaultMenu"><i class="icon-home"></i>Scholarships</a></li>
+                    <li><a href="http://localhost:63342/Scholarship-portal-master/applications.html" id="menu2"><i class="fa fa-wpforms"></i>Apply for Scholarship </a></li>
+                    <li><a href="http://localhost:63342/Scholarship-portal-master/profile.html" id="menu4"><i class="fa fa-user-circle"></i>Profile </a></li>
+          </ul>
+        </nav>
+        <div class="content-inner">
+          <div id="eligible-scholarships">
+			<div class="col-lg-12 top-margin">
+                  <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                      <h3 class="h4">You are eligible for following scholarships</h3>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-hover text-center" id="eligibleScTable">
+                            <li>
+                                <ul>
+                                    <a href="https://scholarships.gov.in/">Indian Government Scholarships</a>
+                                </ul>
+                                <ul>
+                                    <a href="https://mahadbt.maharashtra.gov.in/">Maharashtra Government Scholarships</a>
+                                </ul>
+                                <ul>
+                                    <a href="https://www.education.gov.in/scholarships">Ministry of Education Scholarships</a>
+                                </ul>
+                                <ul>
+                                    <a href="https://services.india.gov.in/service/listing?cat_id=66&ln=en">National Scholarships & Student Finance</a>
+                                </ul>
+                                <ul>
+                                    <a href="https://old.mu.ac.in/scholarships">University of Mumbai Scholarships</a>
+                                </ul>
+                            </li>
+                        </table>
+                        <!-- Modal-->
+                      <div id="eligibleScModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+                        <div role="document" class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 id="modalTitle" class="modal-title">Details</h4>
+                              <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                              <div>
+                                 <div class="form-group row">
+                          			<label class="col-sm-4 form-control-label">Scholarship Name</label>
+                        	 		<div class="col-sm-8">
+                            			<p class="form-control" id="dsName"></p>
+                          			</div>
+                        		 </div>
+                        		 <div class="form-group row">
+                          			<label class="col-sm-4 form-control-label">Scholarship Type</label>
+                        	 		<div class="col-sm-8">
+                            			<p class="form-control" id="dsType"></p>
+                          			</div>
+                        		 </div>
+                        		 <div class="form-group row">
+                          			<label class="col-sm-4 form-control-label">Remark</label>
+                        	 		<div class="col-sm-8">
+                            			<p class="form-control" id="dsRemark"></p>
+                          			</div>
+                        		 </div>
+                        		 <div class="form-group row">
+                          			<label class="col-sm-4 form-control-label">Last Date Of Application</label>
+                        	 		<div class="col-sm-8">
+                            			<p class="form-control" id="dlda"></p>
+                          			</div>
+                        		 </div>
+                        		 <div class="form-group row">
+                          			<label class="col-sm-4 form-control-label">Scholarship Amount (in Rs)</label>
+                        	 		<div class="col-sm-8">
+                            			<p type="text" class="form-control" id="dsamount"></p>
+                          			</div>
+                        		 </div>
+                        		 <div class="form-group row">
+                          			<label class="col-sm-4 form-control-label">No of Students Eligible</label>
+                        	 		<div class="col-sm-8">
+                            			<p type="number" class="form-control" id="dstudents"></p>
+                          			</div>
+                        		 </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" id="closeDesc" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                              <button type="button" id="dApply" class="btn btn-primary">Apply</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+			</div>
+          <footer class="main-footer">
+            <div class="container-fluid">
+              <div class="row">
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
